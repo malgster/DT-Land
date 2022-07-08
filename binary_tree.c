@@ -18,7 +18,7 @@ binary_tree* new_binary_tree(int x){
 
 void clear_binary_tree(binary_tree* bt){
     if (bt == NULL){
-        printf("the binary tree is already empty");
+        printf("the tree is already empty");
         return;
     }
     printf("freeing node [%d]\n", bt->node);
@@ -42,6 +42,27 @@ binary_tree* unite_binary_trees(binary_tree* lefti, binary_tree* righti, int nod
         righti->parent = bt;
     }
     return bt;
+}
+
+void print_binary_tree(binary_tree* bt){
+    if (bt == NULL){
+        printf("nothing to print, the tree is empty");
+        return;
+    }
+
+    printf("printing the tree :\n");
+
+    if (bt->parent != NULL){ // if it's the root
+        printf("(%d) -> %d\n", bt->parent->node, bt->node);
+    } else {
+        printf("(%d)\n", bt->node);
+    }
+    if (bt->left_tree != NULL) print_binary_tree(bt->left_tree);
+    if (bt->left_tree != NULL) print_binary_tree(bt->right_tree);
+}
+
+int number_of_nodes(binary_tree* bt){
+        return (bt == NULL) ? 0 : (number_of_nodes(bt->left_tree) + number_of_nodes(bt->right_tree) + 1);
 }
 
 int main(void){

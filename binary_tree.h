@@ -14,6 +14,8 @@ typedef struct binary_tree{
 binary_tree* new_binary_tree(int x);
 void clear_binary_tree(binary_tree* bt);
 binary_tree* unite_binary_trees(binary_tree* lefti, binary_tree* righti, int node);
+void print_binary_tree_prefix(binary_tree* bt);
+int number_of_nodes(binary_tree* bt);
 
 
 #endif
