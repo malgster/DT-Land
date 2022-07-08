@@ -23,6 +23,36 @@ int dl_last_node(double_list* dli){
     return dli->end->content;
 }
 
+double_list* add_node_end_dl(double_list* dli, int x){
+    double_list_node* node;
+    node = malloc(sizeof(*node));
+    if (node == NULL){
+        printf("dynamic allocation error : FORCED EXIT");
+        exit(1);
+
+    }
+    node->content = x;
+    node->next = NULL;
+    node->back = NULL;
+
+    if (empty_double_list(dli)){ 
+        dli = malloc(sizeof(*dli));
+        if (dli == NULL){
+            printf("dynamic allocation error : FORCED EXIT");
+            exit(1);
+        }
+        dli->size = 0;
+        dli->start = node;
+        dli->end = node;
+    } else {
+        dli->end->next = node;
+        node->back = dli->end;
+        dli->end = node;
+    }
+    dli->size = dli->size + 1;
+    return dli;
+}
+
 double_list* add_node_front_dl(double_list* dli, int x){
     double_list_node* node;
     node = malloc(sizeof(*node));
@@ -36,7 +66,7 @@ double_list* add_node_front_dl(double_list* dli, int x){
     node->back = NULL;
 
     if (empty_double_list(dli)){ 
-        dli = malloc(sizeof(*li));
+        dli = malloc(sizeof(*dli));
         if (dli == NULL){
             printf("dynamic allocation error : FORCED EXIT");
             exit(1);
@@ -45,16 +75,12 @@ double_list* add_node_front_dl(double_list* dli, int x){
         dli->start = node;
         dli->end = node;
     } else {
-        dli->end->next = node;
-        element->back = dlil->end;
-        li->end = element;
+        dli->start->back = node;
+        node->next = dli->start;
+        dli->start = node;
     }
-    li->size = li->size + 1;
+    dli->size = dli->size + 1;
     return dli;
-}
-
-double_list* add_node_end_dl(double_list* dli, int x){
-
 }
 
 double_list* pop_back_dl(double_list* dli){
@@ -64,7 +90,7 @@ double_list* pop_back_dl(double_list* dli){
     }
     if (dli->start == dli->end){ // si vrai on a un seul élément dans la liste
         free(dli);
-        dli = NULL // on sait jamais
+        dli = NULL; // on sait jamais
         return new_double_list();
     }
 
@@ -72,10 +98,10 @@ double_list* pop_back_dl(double_list* dli){
     dli->end = dli->end->back;
     dli->end->next = NULL;
     temp_node->next = NULL;
-    temp->node->back = NULL;
+    temp_node->back = NULL;
     free(temp_node); temp_node = NULL;
 
-    dli->length = dli->length-1
+    dli->size = dli->size-1;
     return dli;
 
 }
@@ -86,9 +112,9 @@ double_list* pop_front_dl(double_list* dli){
         printf("the double list is already empty");
         return new_double_list();
     }
-    if (dli->start == dli->end){ // si vrai on a un seul élément dans la liste
+    if (dli->start == dli->end){ // if true we only have one element in the list
         free(dli);
-        dli = NULL // on sait jamais
+        dli = NULL; // we never know
         return new_double_list();
     }
 
@@ -99,7 +125,7 @@ double_list* pop_front_dl(double_list* dli){
     temp_node->back = NULL;
     free(temp_node); temp_node = NULL;
 
-    dli->length = dli->length-1
+    dli->size = dli->size-1;
     return dli;
 
 } 
@@ -112,9 +138,20 @@ void print_double_list(double_list* dli){
     double_list_node* temp_dl_node = dli->start;
     while(temp_dl_node->next != NULL){
         printf("[%d] ", temp_dl_node->content);
-        temp_dl_node = temp_dl_node->next
+        temp_dl_node = temp_dl_node->next;
     }
     printf("\n");
+}
+
+double_list* clear_double_list(double_list* dli){
+    while (empty_double_list(dli)){
+        dli = pop_back_dl(dli);
+    }
+    return new_double_list();
+}
+
+int main(void) {
+    return 0;
 }
 
 
