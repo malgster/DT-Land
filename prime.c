@@ -1,7 +1,10 @@
 #include "prime.h"
 
+//  compile with -lm option at the end  //
+
+
 /**
- * check whether the int in parameter is prime or not 
+ * @brief check whether the int in parameter is prime or not 
  * 
  * @return 
  * 1 -> prime
@@ -20,4 +23,20 @@ int is_prime(const int x){
         }
     }
     return 1;
+}
+
+/**
+ * @brief return x if it's a prime number, or the next prime number if it isn't
+ * 
+ */
+
+int next_prime(int x){
+    while (is_prime(x) != 1){
+        x++;
+    }
+    return x;
+}
+
+int main(void){
+    return 0;
 }

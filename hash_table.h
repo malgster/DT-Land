@@ -13,6 +13,7 @@ typedef struct ht_item{
 
 typedef struct hash_table{
     int size; // how much items it can hold
+    int base_size; // size at it's creation
     int count; // how many items in it
     ht_item** items; // array of pointers to the table's items
 } hash_table;

@@ -3,3 +3,5 @@ prog_stack
 prog_sarray
 prog_list
 prog_btree
+prog_ht
+prog_prime
