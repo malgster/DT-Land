@@ -4,7 +4,7 @@
 #define HT_NUMBER_ONE 131 // random prime numbers
 #define HT_NUMBER_TWO 139
 #define HT_INITIAL_BASE_SIZE 50
-static ht_item _DELETED_ITEM_ = {NULL, NULL}; // structure of deleted item 
+static ht_item _DELETED_ITEM_ = {NULL, NULL, -1}; // structure of deleted item 
 
 static ht_item* new_ht_item(const char* keyu, const char* val){ // static cuz only accessible here
     ht_item* item = malloc(sizeof(ht_item));
@@ -136,6 +136,7 @@ void ht_insert(hash_table* ht, const char* key, const char* value){
             i++;
         }
     ht->items[index] = item;
+    item->hc = index;
     ht->count++;
     }
 }
@@ -179,9 +180,6 @@ void ht_delete(hash_table* ht, const char* key) {
     ht->count--;
 }
 
-
-
-
 void print_hash_table(hash_table* ht){
     int i;
     for (i = 0; i < ht->size; i++){
@@ -189,6 +187,10 @@ void print_hash_table(hash_table* ht){
             printf("key : %s | value : %s\n", ht->items[i]->key, ht->items[i]->value);
         }
     }
+}
+
+int main(void){
+ return 0;
 }
 
 

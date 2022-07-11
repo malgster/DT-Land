@@ -1,28 +1,71 @@
+/**
+ * @file double_list.c
+ * @author malgster
+ * @brief implementation of the double lists
+ * 
+ * 
+ */
+
 #include "double_list.h"
 
+
+/**
+ * @brief create a NULL double list
+ * 
+ * @return double_list* 
+ */
 double_list* new_double_list(){
     return NULL;
 }
 
-
+/**
+ * @brief returns 1 if the dl is empty : 0 if not
+ * 
+ * @param dli 
+ * @return int 
+ */
 int empty_double_list(double_list* dli){
     return (dli = NULL) ? 1 : 0;
 }
 
+/**
+ * @brief return the dl's size
+ * 
+ * @param dli 
+ * @return int 
+ */
 int double_list_size(double_list* dli){
     return (empty_double_list(dli)) ? 0 : dli->size;
 }
-
+/**
+ * @brief returns the first node of the dl
+ * 
+ * @param dli 
+ * @return int 
+ */
 int dl_first_node(double_list* dli){
     if (empty_double_list(dli)) exit(1);
     return dli->start->content;
 }
 
+/**
+ * @brief return the last node of the dl
+ * 
+ * @param dli 
+ * @return int 
+ */
 int dl_last_node(double_list* dli){
     if (empty_double_list(dli)) exit(1);
     return dli->end->content;
 }
 
+/**
+ * @brief adds a node at the end of the list
+ * 
+ * @param dli 
+ * @param x 
+ * @return double_list* 
+ */
 double_list* add_node_end_dl(double_list* dli, int x){
     double_list_node* node;
     node = malloc(sizeof(*node));
@@ -53,6 +96,13 @@ double_list* add_node_end_dl(double_list* dli, int x){
     return dli;
 }
 
+/**
+ * @brief adds a node a the end of the dl
+ * 
+ * @param dli 
+ * @param x 
+ * @return double_list* 
+ */
 double_list* add_node_front_dl(double_list* dli, int x){
     double_list_node* node;
     node = malloc(sizeof(*node));
@@ -83,12 +133,18 @@ double_list* add_node_front_dl(double_list* dli, int x){
     return dli;
 }
 
+/**
+ * @brief delete the element at the back of the dl
+ * 
+ * @param dli 
+ * @return double_list* 
+ */
 double_list* pop_back_dl(double_list* dli){
     if (empty_double_list(dli)){
         printf("the double list is already empty");
         return new_double_list();
     }
-    if (dli->start == dli->end){ // si vrai on a un seul élément dans la liste
+    if (dli->start == dli->end){ // if true we only have on element in the list
         free(dli);
         dli = NULL; // on sait jamais
         return new_double_list();
@@ -106,7 +162,12 @@ double_list* pop_back_dl(double_list* dli){
 
 }
 
-
+/**
+ * @brief delete the element at the front of the dl
+ * 
+ * @param dli 
+ * @return double_list* 
+ */
 double_list* pop_front_dl(double_list* dli){
     if (empty_double_list(dli)){
         printf("the double list is already empty");
@@ -130,6 +191,12 @@ double_list* pop_front_dl(double_list* dli){
 
 } 
 
+
+/**
+ * @brief print the dl
+ * 
+ * @param dli 
+ */
 void print_double_list(double_list* dli){
     if (empty_double_list(dli)){
         printf("la liste est vide");
@@ -143,6 +210,12 @@ void print_double_list(double_list* dli){
     printf("\n");
 }
 
+/**
+ * @brief free the entire dl structure in memory
+ * 
+ * @param dli 
+ * @return double_list* 
+ */
 double_list* clear_double_list(double_list* dli){
     while (empty_double_list(dli)){
         dli = pop_back_dl(dli);

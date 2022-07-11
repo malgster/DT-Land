@@ -9,6 +9,7 @@
 typedef struct ht_item{
     char* key;
     char* value;
+    int hc; // for tests 
 } ht_item; 
 
 typedef struct hash_table{

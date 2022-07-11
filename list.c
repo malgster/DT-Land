@@ -1,21 +1,36 @@
-#include <stdio.h>
-#include <stdlib.h>
+/**
+ * @file list.c
+ * @author malgster
+ * @brief simple linked list implementation 
+ */
+
+
 #include "list.h"
 
-/*Author : malgster */
-
+/**
+ * @brief created a new NULL list
+ * 
+ * @return list_t* 
+ */
 list_t* new_list(){
     return NULL; // une liste vide = pas d'éléments = NULL
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-list_t* add_element_end_of_list(list_t* myList, char car){ // on ajoute en fin de liste un élément
+/**
+ * @brief adds an element at the end of the given list
+ * 
+ * @param myList 
+ * @param car 
+ * @return list_t* 
+ */
+list_t* add_element_end_of_list(list_t* myList, char car){ 
     list_Element* element;
     element = malloc(sizeof(*element));
 
     if (element == NULL){ // une ptite sécu si jamais l'allocation marche pas (optionnel)
-        printf("problème d'allocation dynamique : EXIT \n");
+        printf("Error in memory allocation : FORCED EXIT\n");
         exit(1); // exit(1) == arrêt et sortie anormale de la fonction
     }
     // ici on ajoute un élément à la fin, donc il pointera sur NULL vu que ça sera le DERNIER élément
@@ -39,6 +54,13 @@ list_t* add_element_end_of_list(list_t* myList, char car){ // on ajoute en fin d
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief adds an element at the start of the given list
+ * 
+ * @param myList 
+ * @param car 
+ * @return list_t* 
+ */
 list_t* add_element_start_of_list(list_t* myList, char car){
     list_Element* element;
     element = malloc(sizeof(*element));
@@ -62,19 +84,27 @@ list_t* add_element_start_of_list(list_t* myList, char car){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-int is_list_empty(list_t* myList){ // si de base myList pointe vers NULL, elle est donc vide
-    return (myList == NULL) ? 0 : 1; // googlez les ternaires sinon :
-    /* c'est l'equivalant de :
-        if (myList == NULL) return 0
-        return 1; 
-    */
+/**
+ * @brief returns 1 if the list is empty : 0 if not
+ * 
+ * @param myList 
+ * @return int 
+ */
+int is_list_empty(list_t* myList){ 
+    return (myList == NULL) ? 1 : 0;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief returns the list's length
+ * 
+ * @param myList 
+ * @return int 
+ */
 int list_length(list_t* myList){
     int size = 0;
-    if (is_list_empty(myList) == 0) return size;
+    if (is_list_empty(myList) == 1) return size;
     list_t* temporary_list_pointer; temporary_list_pointer = myList;
     while(temporary_list_pointer != NULL){
         size++;
@@ -85,8 +115,14 @@ int list_length(list_t* myList){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief prints the list
+ * 
+ * @param myList 
+ * @return int 
+ */
 int print_list(list_t* myList){
-    if(is_list_empty(myList) == 0){ // si myList == NULL
+    if(is_list_empty(myList) == 1){ // si myList == NULL
         printf("la liste est vide, rien à afficher");
         return 1;
     }
@@ -101,19 +137,36 @@ int print_list(list_t* myList){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief return the value of the list's first element
+ * 
+ * @param myList 
+ * @return char 
+ */
 char first_element_value(list_t* myList){
-    return myList->car; // return la valeur du premier element
+    return myList->car; 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief return a pointer to the next element after the one in param
+ * 
+ * @param myList 
+ * @return list_t* 
+ */
 list_t* next_element(list_t* myList){
-    return myList->next; // return le pointeur vers son prochain élément
+    return myList->next; 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-
+/**
+ * @brief delete the first element of the list
+ * 
+ * @param myList 
+ * @return list_t* 
+ */
 list_t* delete_first_element(list_t* myList){
     list_Element* element;
     element = malloc(sizeof(*element));
@@ -134,8 +187,14 @@ list_t* delete_first_element(list_t* myList){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief delete the last element of the list
+ * 
+ * @param myList 
+ * @return list_t* 
+ */
 list_t* delete_last_element(list_t* myList){
-    if (is_list_empty(myList) == 0){ // il y'a pas d'éléments à supprimer
+    if (is_list_empty(myList) == 1){ // il y'a pas d'éléments à supprimer
         return new_list(); // on aurait pu mettre "return NULL", ça revient au même
     }
     if (myList->next == NULL){ // si la liste contient UN SEUL element
@@ -162,8 +221,13 @@ list_t* delete_last_element(list_t* myList){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief free the entire list in memory
+ * 
+ * @param myList 
+ */
 void clear_list(list_t* myList){
-    if(is_list_empty(myList) == 0){ // si la liste est vide de base on sort de la fonction
+    if(is_list_empty(myList) == 1){ // si la liste est vide de base on sort de la fonction
         return; // on sort de la fonction, vu qu'il n'y a rien d'alloué de toute façon
 
     } else {                                            //
@@ -183,6 +247,14 @@ void clear_list(list_t* myList){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief insert an element in a given index of the list
+ * 
+ * @param myList 
+ * @param car 
+ * @param position 
+ * @return list_t* 
+ */
 list_t* insert_char(list_t* myList, char car, int position){ 
      if (position > list_length(myList)) { // on se protège d'une sorte de "indexOutOfBoundException" ;)
         printf("the given index is bigger than the list's length"); // la position donnée est supérieur à la longueur de la liste
@@ -212,7 +284,13 @@ list_t* insert_char(list_t* myList, char car, int position){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-
+/**
+ * @brief delete an the element of the list at the given index
+ * 
+ * @param myList 
+ * @param position 
+ * @return list_t* 
+ */
 list_t* delete_element(list_t* myList, int position){
     if (position > list_length(myList)) { // on se protège d'une sorte de "indexOutOfBoundException" ;)
         printf("the given index is bigger than the list's length"); // la position donnée est supérieur à la longueur de la liste
@@ -238,8 +316,15 @@ list_t* delete_element(list_t* myList, int position){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief returns 1 if the list have the same lenght : 0 if not
+ * 
+ * @param liste1 
+ * @param liste2 
+ * @return int 
+ */
 int list_are_equals(list_t* liste1, list_t* liste2){
-    return (list_length(liste1) == list_length(liste2)) ? 0 : 1; 
+    return (list_length(liste1) == list_length(liste2)) ? 1 : 0; 
     /*c'est l'équavalant de 
     if (list_length(liste1) == list_length(liste2)) return 1;
     return 0;*/
@@ -247,16 +332,30 @@ int list_are_equals(list_t* liste1, list_t* liste2){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief returns 1 if the given element is in the list : 0 if not
+ * 
+ * @param myList 
+ * @param car 
+ * @return int 
+ */
 int is_in_list(list_t* myList, char car){
     list_Element* temporary_list_pointer = myList;
     while (temporary_list_pointer != NULL){
         temporary_list_pointer = temporary_list_pointer->next; // on passe à l'élément suivant
-        if (temporary_list_pointer->car == car) return 0; //on vérifie si la liste contient le caratère
+        if (temporary_list_pointer->car == car) return 1; //on vérifie si la liste contient le caratère
     }
     printf("Le caractère n'est pas dans la liste");
-    return 1;
+    return 0;
 }
 
+/**
+ * @brief concatenates the lists in param
+ * 
+ * @param list1 
+ * @param list2 
+ * @return list_t* 
+ */
 list_t* concatenate_lists(list_t* list1, list_t* list2){
     list_Element* temporary_list_pointer = list1;
     while (temporary_list_pointer != NULL){
@@ -271,22 +370,6 @@ list_t* concatenate_lists(list_t* list1, list_t* list2){
 /////////////////////////////////////////////////////////////////////////////////////////
 
 int main(void){
-    list_t* mylist = new_list();
-    list_t* myOtherList = new_list();
-    mylist = add_element_end_of_list(mylist, 'm');
-    mylist = add_element_end_of_list(mylist, 'a');
-    mylist = add_element_end_of_list(mylist, 'l');
-    mylist = add_element_end_of_list(mylist, 'a');
-    mylist = add_element_end_of_list(mylist, 'k');
-    myOtherList = add_element_start_of_list(myOtherList, 'k');
-    myOtherList = add_element_start_of_list(myOtherList, 'a');
-    myOtherList = add_element_start_of_list(myOtherList, 'l');
-    myOtherList = add_element_start_of_list(myOtherList, 'a');
-    myOtherList = add_element_start_of_list(myOtherList, 'm');
-    print_list(mylist); print_list(myOtherList);
-    
-    clear_list(mylist);
-    clear_list(myOtherList);
     return 0;
 }
 

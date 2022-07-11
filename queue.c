@@ -1,8 +1,23 @@
+/**
+ * @file queue.c
+ * @author malgster
+ * @brief implementation of queues
+ * 
+ * 
+ */
+
+
 #include "queue.h"
 
 
 /* [head]-->[node]-->[node]-->[node]-->[tail]*/
 
+
+/**
+ * @brief creates a new queue
+ * 
+ * @return queue* 
+ */
 queue* init_queue(){
     queue* q = malloc(sizeof(queue*));
     q->head = NULL;
@@ -10,7 +25,13 @@ queue* init_queue(){
     q->size = 0;
     return q;
 }
-
+/**
+ * @brief add a new element in a queue
+ * 
+ * @param q 
+ * @param content 
+ * @return queue* 
+ */
 queue* enqueue(queue* q, int content){
     node* newnode = malloc(sizeof(node));
     if (newnode == NULL){
@@ -30,7 +51,12 @@ queue* enqueue(queue* q, int content){
     q->size++;
     return q;
 }
-
+/**
+ * @brief remove the last element of the queue
+ * 
+ * @param q 
+ * @return queue* 
+ */
 queue* dequeue(queue* q){
     if (q->head == NULL) {
         printf("can't dequeue an empty queue");
@@ -45,7 +71,11 @@ queue* dequeue(queue* q){
     q->size--;
     return q;
 }
-
+/**
+ * @brief print the given queue
+ * 
+ * @param q 
+ */
 void print_queue(queue* q){
     if (q->head == NULL){
         printf("The queue is empty");
@@ -60,19 +90,38 @@ void print_queue(queue* q){
     free(n);
 
 }
-
+/**
+ * @brief Get the head of the queue
+ * 
+ * @param q 
+ * @return node* 
+ */
 node* get_rear(queue* q){
     return q->head;
 }
-
+/**
+ * @brief Get the tail of the queue
+ * 
+ * @param q 
+ * @return node* 
+ */
 node* get_front(queue* q){
     return q->tail;
 }
-
+/**
+ * @brief returns 1 if the queue is empty : 0 if not
+ * 
+ * @param q 
+ * @return int 
+ */
 int is_queue_empty(queue* q){
     return (q->size == 0 || q == NULL) ? 1 : 0;
 }
-
+/**
+ * @brief free the entire queue
+ * 
+ * @param q 
+ */
 void clear_queue(queue* q){
     while (is_queue_empty(q) == 0) dequeue(q);
 }
