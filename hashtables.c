@@ -1,3 +1,11 @@
+/**
+ * @file hashtables.c
+ * @author malgster [highly influenced by https://github.com/bloominstituteoftechnology/C-Hash-Tables]
+ * @brief implementing hashtables
+ *  
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +14,7 @@
   Hash table key/value pair with linked list pointer.
 
   Note that an instance of `LinkedPair` is also a node in a linked list.
-  More specifically, the `next` field is a pointer pointing to the the 
+  the `next` field is a pointer pointing to the the 
   next `LinkedPair` in the list of `LinkedPair` nodes. 
  */
 typedef struct LinkedPair {
