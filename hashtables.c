@@ -23,8 +23,12 @@ typedef struct HashTable {
   LinkedPair **storage;
 } HashTable;
 
-/*
-  Create a key/value linked pair to be stored in the hash table.
+/**
+ * @brief  Create a key/value linked pair to be stored in the hash table.
+ * 
+ * @param key 
+ * @param value 
+ * @return LinkedPair* 
  */
 LinkedPair *create_pair(char *key, char *value)
 {
@@ -36,8 +40,10 @@ LinkedPair *create_pair(char *key, char *value)
   return pair;
 }
 
-/*
-  Use this function to safely destroy a hashtable pair.
+/**
+ * @brief destroys a hashtable pair
+ * 
+ * @param pair 
  */
 void destroy_pair(LinkedPair *pair)
 {
@@ -48,10 +54,12 @@ void destroy_pair(LinkedPair *pair)
   }
 }
 
-/*
-  djb2 hash function
-
-  Do not modify this!
+/**
+ * @brief djb2 hash function, returns an index -> index = hashcode % hashtable's capacity
+ * 
+ * @param str 
+ * @param max 
+ * @return unsigned int 
  */
 unsigned int hash(char *str, int max)
 {
@@ -66,10 +74,11 @@ unsigned int hash(char *str, int max)
   return hash % max;
 }
 
-/*
-  Fill this in.
-
-  All values in storage should be initialized to NULL
+/**
+ * @brief Create a hash table 
+ * 
+ * @param capacity 
+ * @return HashTable* 
  */
 HashTable *create_hash_table(int capacity)
 {
@@ -80,15 +89,22 @@ HashTable *create_hash_table(int capacity)
   return ht;
 }
 
-/*
-  Fill this in.
 
+/*
   Inserting values to the same index with different keys should be
   added to the corresponding LinkedPair list.
 
   Inserting values to the same index with existing keys can overwrite
   the value in th existing LinkedPair list.
  */
+
+  /**
+   * @brief insert a new pair in the hashtable
+   * 
+   * @param ht 
+   * @param key 
+   * @param value 
+   */
 void hash_table_insert(HashTable *ht, char *key, char *value)
 {
   unsigned int index = hash(key, ht->capacity);
@@ -112,19 +128,18 @@ void hash_table_insert(HashTable *ht, char *key, char *value)
   }
 }
 
-/*
-  Fill this in.
-
-  Should search the entire list of LinkedPairs for existing
-  keys and remove matching LinkedPairs safely.
-
-  Don't forget to free any malloc'ed memory!
+/**
+ * @brief search the entire list of LinkedPairs for existing keys and remove matching LinkedPairs safely.
+ * 
+ * @param ht 
+ * @param key 
  */
-// (ht->storage[hashedKey])
 void hash_table_remove(HashTable *ht, char *key) {
+
   unsigned int index = hash(key, ht->capacity);
   LinkedPair *current_pair = ht->storage[index];
   LinkedPair *last_pair = NULL;
+
   if (ht->storage[index]){
     while (current_pair != NULL && strcmp(current_pair->key, key) != 0) {
       last_pair = current_pair;
@@ -142,16 +157,15 @@ void hash_table_remove(HashTable *ht, char *key) {
   }
 }
 
-/*
-  Fill this in.
-
-  Should search the entire list of LinkedPairs for existing
-  keys.
-
-  Return NULL if the key is not found.
+/**
+ * @brief search the entire list of LinkedPairs for existing keys. Return NULL if the key is not found.
+ * 
+ * @param ht 
+ * @param key 
+ * @return char* 
  */
 
-char *hash_table_retrieve(HashTable *ht, char *key) {
+char *hash_table_retrieve(HashTable *ht, const char *key) {
   unsigned int index = hash(key, ht->capacity);
   LinkedPair* current_pair = ht->storage[index];
   LinkedPair* last_pair;
@@ -179,10 +193,10 @@ char *hash_table_retrieve(HashTable *ht, char *key) {
   }
 }
 
-/*
-  Fill this in.
-
-  Don't forget to free any malloc'ed memory!
+/**
+ * @brief holy destruction of the hash table
+ * 
+ * @param ht 
  */
 void destroy_hash_table(HashTable *ht) {
   int i;
@@ -202,13 +216,11 @@ void destroy_hash_table(HashTable *ht) {
 
 }
 
-/*
-  Fill this in.
-
-  Should create a new hash table with double the capacity
-  of the original and copy all elements into the new hash table.
-
-  Don't forget to free any malloc'ed memory!
+/**
+ * @brief create a new hash table with double the capacity of the original and copy all elements into the new hash table.
+ * 
+ * @param ht 
+ * @return HashTable* 
  */
 
  HashTable* hash_table_resize(HashTable* ht) {
@@ -229,27 +241,7 @@ void destroy_hash_table(HashTable *ht) {
  }
 
 
-#ifndef TESTING
 int main(void)
 {
-  struct HashTable *ht = create_hash_table(2);
-
-  hash_table_insert(ht, "line_1", "Tiny hash table");
-  hash_table_insert(ht, "line_2", "Filled beyond capacity");
-  hash_table_insert(ht, "line_3", "Linked list saves the day!");
-
-  printf("%s\n", hash_table_retrieve(ht, "line_1"));
-  printf("%s\n", hash_table_retrieve(ht, "line_2"));
-  printf("%s\n", hash_table_retrieve(ht, "line_3"));
-
-  int old_capacity = ht->capacity;
-  ht = hash_table_resize(ht);
-  int new_capacity = ht->capacity;
-
-  printf("\nResizing hash table from %d to %d.\n", old_capacity, new_capacity);
-
-  destroy_hash_table(ht);
-
-  return 0;
+return 0;
 }
-#endif
