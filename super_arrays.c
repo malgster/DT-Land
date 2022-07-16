@@ -6,6 +6,7 @@
  */
 
 #include "super_arrays.h"
+#include <string.h>
 
 /**
  * @brief allocation the needed memory to create an array
@@ -134,6 +135,53 @@ super_array_t* read_array(void){
 }
 
 /**
+ * @brief compare two strings 
+ *          if sa_one < sa_two => return a negative integer
+ *          if sa_one > sa_two => return a positive integer
+ *          if sa_one = sa_two => return 0
+ * 
+ * @param sa_one 
+ * @param sa_two 
+ * @return int 
+ */
+int super_array_compare(super_array_t* sa_one, super_array_t* sa_two){
+    char* tmp_s1 = s1->array; char* tmp_s2 = s2->array;
+    while((*(tmp_s1) == *(tmp_s2))) {
+        (tmp_s1)++; (tmp_s2)++;
+    }
+    return *(tmp_s1) - *(tmp_s2);
+}
+/**
+ * @brief  return the index of the char in the super Array
+ * 
+ * @param sa 
+ * @param car 
+ * @return int 
+ */
+int char_index(const super_array_t* sa,const char car) { 
+    int i = 0; int res = -1;
+    for (i=0; i <=length(sa); i++){
+        if(sa->array[i]== car) {
+            res = i;
+            return res;
+        }
+    }
+    return res;
+}
+
+/**
+ * @brief returns the first occurence of char in the super array at the given index
+ * 
+ * @param sa 
+ * @param index 
+ * @return char 
+ */
+char charAt( const super_array_t* sa, const int index) { 
+    return *(sa->array+index);
+}
+
+
+/**
  * @brief free the whole super array structure
  * 
  * @param mySuperArray 
@@ -144,7 +192,12 @@ void free_super_array(super_array_t* mySuperArray){
 }
 
 int main (void){
+    super_array_t* first = read_array();
+    super_array_t* second = read_array();
+    print_array(first);
+    print_array(second);
+    printf("super_array_compare result : %d\n", super_array_compare(first, second));
+    printf("sa_compare result : %d\n", sa_compare(first, second));
+    printf("strcmp result : %d\n", strcmp(first->array, second->array));
     return 0;
 }
-
-/// print if array is empty

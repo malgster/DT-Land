@@ -18,6 +18,8 @@ void insert_in_array(super_array_t* mySuperArray, const int index,const char car
 int length(const super_array_t* myMfArray);
 super_array_t* read_array(void);
 void free_super_array(super_array_t* mySuperArray);
+char charAt(const super_array_t* sa, const int index);
+int char_index(const super_array_t* sa,const char car);
 
 
 

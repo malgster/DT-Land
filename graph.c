@@ -76,7 +76,21 @@ void free_graph(Graph gr){
     free(gr);
 }
 
-void print_graph(Graph gr){}
+void print_graph(Graph gr){
+    if(graph_is_empty(gr)){
+        printf("I can't print a non-existing graph..");
+        return;
+    }
+    int i;
+    for(i = 1; i < gr->nbrVertices + 1; i++){
+        NodeListElement* n = gr->neighbours[i -1].start;
+        printf("(%d)", i);
+        while (n != NULL){
+            printf("%d", n->value);
+            n = n->next
+        }
+    }
+}
 
 
 
