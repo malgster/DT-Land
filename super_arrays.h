@@ -8,14 +8,14 @@ typedef struct {
     int length;
 } super_array_t, string_t;
 
-char* new_array(int size);
+char* new_array(const int size);
 super_array_t* new_super_array(int length);
-void fill_array(super_array_t* superArray,char car);
-void print_array(super_array_t* superArray);
-void println_array(super_array_t* superArray);
-void wider_array(super_array_t* superArray, int more);
-void insert_in_array(super_array_t* mySuperArray, int index, char car);
-int length(super_array_t* myMfArray);
+void fill_array(super_array_t* superArray,const char car);
+void print_array(const super_array_t* superArray);
+void println_array(const super_array_t* superArray);
+void wider_array(super_array_t* superArray, const int more);
+void insert_in_array(super_array_t* mySuperArray, const int index,const char car);
+int length(const super_array_t* myMfArray);
 super_array_t* read_array(void);
 void free_super_array(super_array_t* mySuperArray);
 

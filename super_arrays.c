@@ -13,7 +13,7 @@
  * @param size
  * @return the created array
  */
-char* new_array(int size) {
+char* new_array(const int size) {
     char* myArray = malloc(sizeof(char) * size);
     if (myArray == NULL){
         printf("Error in memory allocation : FORCED EXIT\n");
@@ -28,7 +28,7 @@ char* new_array(int size) {
  * @param length
  * @return the created super array
  */
-super_array_t* new_super_array(int length){
+super_array_t* new_super_array(const int length){
     super_array_t* mySuperArray =  malloc(sizeof(super_array_t));
     if (mySuperArray == NULL){
         printf("Error in memory allocation : FORCED EXIT\n");
@@ -46,7 +46,7 @@ super_array_t* new_super_array(int length){
  * @param superArray 
  * @param car 
  */
-void fill_array(super_array_t* superArray,char car) {
+void fill_array(super_array_t* superArray, const char car) {
     for (int i=0; i < superArray->length; i++) {
         *(superArray->array+i) = car;
     }
@@ -56,8 +56,8 @@ void fill_array(super_array_t* superArray,char car) {
  * 
  * @param superArray 
  */
-void print_array(super_array_t* superArray){
-    if (length(mySuperArray) == 0){
+void print_array(const super_array_t* superArray){
+    if (length(superArray) == 0){
         printf("array is empty\n");
         return;
     }
@@ -71,7 +71,7 @@ void print_array(super_array_t* superArray){
  * 
  * @param superArray 
  */
-void println_array(super_array_t* superArray){
+void println_array(const super_array_t* superArray){
     if (length(superArray) == 0){
         printf("array is empty\n");
         return;
@@ -87,7 +87,7 @@ void println_array(super_array_t* superArray){
  * @param superArray 
  * @param more 
  */
-void wider_array(super_array_t* superArray, int more){ // makes a bigger space for the string's array
+void wider_array(super_array_t* superArray, const int more){ // makes a bigger space for the string's array
     superArray->length = (superArray->length)+more; 
 }
 
@@ -98,7 +98,7 @@ void wider_array(super_array_t* superArray, int more){ // makes a bigger space f
  * @param index 
  * @param car 
  */
-void insert_in_array(super_array_t* mySuperArray, int index, char car){ // include the argument char in the string's array at the given index
+void insert_in_array(super_array_t* mySuperArray, const int index,const char car){ // include the argument char in the string's array at the given index
         if (index < mySuperArray->length){
             *(mySuperArray->array+index) = car;
         } else {
@@ -114,7 +114,7 @@ void insert_in_array(super_array_t* mySuperArray, int index, char car){ // inclu
  * @param myMfArray 
  * @return length of the array
  */
-int length(super_array_t* myMfArray){
+int length(const super_array_t* myMfArray){
     return myMfArray->length;
 }
 

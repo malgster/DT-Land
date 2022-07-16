@@ -15,7 +15,7 @@ stack* new_stack(void){ // une liste vide = pas d'éléments = NULL
  * @param st 
  * @return int
  */
-int stack_is_empty(stack* st){
+int stack_is_empty(const stack* st){
     return (st == NULL) ? 1 : 0;
 }
 /**
@@ -54,14 +54,13 @@ stack* clear_stack(stack* st){
  * @param st 
  */
 void print_stack(stack* st){
-    StackElement* temporary_pt = st;
     if (stack_is_empty(st) == 1){
         printf("La pile est vide");
         return;
     }
-    while(stack_is_empty(st) != 1){
-        printf("[%d]\n", temporary_pt->content);
-        temporary_pt = temporary_pt->next;
+    while(!stack_is_empty(st)){
+        printf("[%d]\n", st->content);
+        st = st->next;
     }
 }
 /**
@@ -83,7 +82,7 @@ stack* pop_stack(stack* st){
  * @param st 
  * @return int
  */
-int top_stack_content(stack* st){
+int top_stack_content(const stack* st){
     if (stack_is_empty(st)){
         printf("the stack is empty\n");
         exit(1);
@@ -98,10 +97,21 @@ int top_stack_content(stack* st){
  */
 int stack_length(stack* st){
     int size;
-    for (size = 0; stack_is_empty(st); size++, st = st->next); // trying a new loop style
+    for (size = 0; !stack_is_empty(st); size++, st = st->next); // trying a new loop style
     return size;
 }
 
 int main(void){
+    stack* st = new_stack();
+    st = stack_on_stack(st, 10);
+    st = stack_on_stack(st, 21);
+    st = stack_on_stack(st, 3);
+    st = stack_on_stack(st, 42);
+    st = stack_on_stack(st, 1);
+    print_stack(st);
+    print_stack(st);
+    printf("the size is : %d\n", stack_length(st));
+    free(st);
+    printf("stack freed successfully\n");
     return 0;
 }

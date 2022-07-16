@@ -11,11 +11,12 @@ struct StackElement* next;
 
 
 stack* new_stack(void);
-int stack_is_empty(stack* st);
+int stack_is_empty(const stack* st);
 stack* stack_on_stack(stack* st, int x);
 stack* clear_stack(stack* st);
 stack* pop_stack(stack* st);
-int top_stack_content(stack* st);
+int top_stack_content(const stack* st);
 int stack_length(stack* st);
+void print_stack(stack* st);
 
 #endif

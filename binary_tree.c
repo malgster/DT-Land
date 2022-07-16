@@ -13,7 +13,7 @@
  * @param x 
  * @return binary_tree* 
  */
-binary_tree* new_binary_tree(int x){
+binary_tree* new_binary_tree(const int x){
     binary_tree* bt = malloc(sizeof(*bt));
     if (bt == NULL){
         printf("error in memory allocation : FORCED EXIT\n");
