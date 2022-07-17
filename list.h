@@ -5,6 +5,7 @@ typedef struct list_t {
     struct list_t* next;
 } list_t, list_Element;
 
+list_t* new_list(void);
 int list_length(list_t* myList);
 int print_list(list_t* myList);
 int is_list_empty(list_t* myList);

@@ -1,7 +1,7 @@
 /**
  * @file super_arrays.c
  * @author malgster
- * @brief better array implementation in c 
+ * @brief better array implementation in c (i guess)
  * 
  */
 
@@ -144,15 +144,15 @@ super_array_t* read_array(void){
  * @param sa_two 
  * @return int 
  */
-int super_array_compare(super_array_t* sa_one, super_array_t* sa_two){
+int super_array_compare(super_array_t* s1, super_array_t* s2){
     char* tmp_s1 = s1->array; char* tmp_s2 = s2->array;
-    while((*(tmp_s1) == *(tmp_s2))) {
-        (tmp_s1)++; (tmp_s2)++;
+    while((*(tmp_s1) == *(tmp_s2))) { // while both characters are the same
+        (tmp_s1)++; (tmp_s2)++; // we go to the next character
     }
-    return *(tmp_s1) - *(tmp_s2);
+    return *(tmp_s1) - *(tmp_s2); // the different between both character's position in the ASCII table
 }
 /**
- * @brief  return the index of the char in the super Array
+ * @brief  return the  first index of the char in the super Array, -1 if the index is not found
  * 
  * @param sa 
  * @param car 
@@ -170,16 +170,52 @@ int char_index(const super_array_t* sa,const char car) {
 }
 
 /**
+ * @brief  return the last index of the char in the super Array, -1 if the index is not found
+ * 
+ * @param sa 
+ * @param car 
+ * @return int 
+ */
+int char_last_index(const super_array_t* sa, const char car){
+    int i; int res = -1;
+    for (i= sa->length; i >= 0; i--){
+        if(sa->array[i]== car) {
+            res = i;
+            return res;
+        }
+    }
+    return res;
+}
+
+/**
  * @brief returns the first occurence of char in the super array at the given index
  * 
  * @param sa 
  * @param index 
  * @return char 
  */
-char charAt( const super_array_t* sa, const int index) { 
+char charAt(const super_array_t* sa, const int index) { 
     return *(sa->array+index);
 }
 
+/**
+ * @brief copies the content of super array src in dest
+ * 
+ * @param src 
+ * @param dest 
+ * @return super_array_t* 
+ */
+super_array_t* super_array_copy(const super_array_t* src, super_array_t* dest){
+        int i = 0; char* tmp_one = src->array; char* tmp_two = dest->array; // to access the arrays not in read-only
+        dest->length = src->length;
+        free(dest->array); // delete the last array and the create a new one with the new size
+        dest->array = new_array(dest->length);
+        while (i < dest->length){
+            tmp_two[i] = tmp_one[i];
+            i++;
+        }
+    return dest;
+}
 
 /**
  * @brief free the whole super array structure
@@ -192,12 +228,6 @@ void free_super_array(super_array_t* mySuperArray){
 }
 
 int main (void){
-    super_array_t* first = read_array();
-    super_array_t* second = read_array();
-    print_array(first);
-    print_array(second);
-    printf("super_array_compare result : %d\n", super_array_compare(first, second));
-    printf("sa_compare result : %d\n", sa_compare(first, second));
-    printf("strcmp result : %d\n", strcmp(first->array, second->array));
+    // testing this, you shall
     return 0;
 }

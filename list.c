@@ -37,7 +37,7 @@ list_t* add_element_end_of_list(list_t* myList, char car){
     element->car = car;
     element->next = NULL;
 
-    if (is_list_empty(myList) == 0){
+    if (is_list_empty(myList)){
         return element;
     }
     // pointeur va nous permettre de faire le parcours sur la liste sans bouger le pointeur myList :
@@ -71,7 +71,7 @@ list_t* add_element_start_of_list(list_t* myList, char car){
     }
 
     element->car = car;
-    if (is_list_empty(myList) == 0){ // si la liste est vide alors l'élément ajouté en PREMIER pointe vers NULL
+    if (is_list_empty(myList)){ // si la liste est vide alors l'élément ajouté en PREMIER pointe vers NULL
         element->next = NULL;
     } else {
         element->next = myList; // si la liste est remplie alors on place cet element au début en le faisant pointer vers le début de la précédente liste
@@ -135,7 +135,9 @@ int print_list(list_t* myList){
     return 0;
 }
 
+
 /////////////////////////////////////////////////////////////////////////////////////////
+
 
 /**
  * @brief return the value of the list's first element
@@ -175,7 +177,7 @@ list_t* delete_first_element(list_t* myList){
         exit(1); // nous fait sortir de la fonction et nous protège des seg fault ;))
     }
     
-    if (is_list_empty(myList) == 0) return myList; // OU return NULL OU return new_list()
+    if (is_list_empty(myList)) return myList; // OU return NULL OU return new_list()
 
     element = myList->next; // element est ainsi égale à myList à partir de son DEUXIEME element, le premier est donc dégagé de la liste
 
@@ -369,7 +371,34 @@ list_t* concatenate_lists(list_t* list1, list_t* list2){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+list_t* reverse_lists(list_t* myList){
+    list_Element* past = NULL;
+    list_Element* present = myList;
+    list_Element* futur = NULL;
+    while (present != NULL){
+        futur = present->next;
+        present->next = past;
+        past = present;
+        present = futur;
+    }
+    myList = past;
+    return myList;
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 int main(void){
+    list_t* myList = new_list();
+    myList = add_element_end_of_list(myList, 'm');
+    myList = add_element_end_of_list(myList, 'a');
+    myList = add_element_end_of_list(myList, 'l');
+    myList = add_element_end_of_list(myList, 'a');
+    myList = add_element_end_of_list(myList, 'k');
+    print_list(myList);
+    myList = reverse_lists(myList);
+    print_list(myList);
+
     return 0;
 }
 
