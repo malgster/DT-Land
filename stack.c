@@ -6,7 +6,7 @@
  * 
  * @return stack*
  */
-stack* new_stack(void){ // une liste vide = pas d'éléments = NULL
+stack* new_stack(void){ // an empty stack = no elements = NULL;
     return NULL;
 }
 /**
@@ -33,8 +33,8 @@ stack* stack_on_stack(stack* st, int x){
         exit(1);
     }
     element->content =x;
-    element->next = st;
-    return element;
+    element->next = st; // the following element is the stack st
+    return element; // returns the stacked stack
 }
 /**
  * @brief free the entire stack
@@ -43,10 +43,10 @@ stack* stack_on_stack(stack* st, int x){
  * @return stack*
  */
 stack* clear_stack(stack* st){
-    while(stack_is_empty(st) == 1){
-        st = pop_stack(st);
+    while(!stack_is_empty(st)){  
+        st = pop_stack(st); // pop every element till the stack is empty
     }
-        return new_stack();
+        return new_stack(); // NULL
 }
 /**
  * @brief print the entire stack
@@ -54,7 +54,7 @@ stack* clear_stack(stack* st){
  * @param st 
  */
 void print_stack(stack* st){
-    if (stack_is_empty(st) == 1){
+    if (stack_is_empty(st)){
         printf("La pile est vide");
         return;
     }
@@ -72,8 +72,8 @@ void print_stack(stack* st){
 stack* pop_stack(stack* st){
     StackElement* element;
     if(stack_is_empty(st)) return new_stack();
-    element = st->next;
-    free(st);
+    element = st->next; // the stack is now equal to itself without it's first element
+    free(st); // free the first element
     return element;
 }
 /**
@@ -85,9 +85,9 @@ stack* pop_stack(stack* st){
 int top_stack_content(const stack* st){
     if (stack_is_empty(st)){
         printf("the stack is empty\n");
-        exit(1);
+        exit(0);
     }
-    return st->content;
+    return st->content; 
 }
 /**
  * @brief gives the stack's length
@@ -97,21 +97,10 @@ int top_stack_content(const stack* st){
  */
 int stack_length(stack* st){
     int size;
-    for (size = 0; !stack_is_empty(st); size++, st = st->next); // trying a new loop style
+    for (size = 0; !stack_is_empty(st); size++, st = st->next); // iterative through the whole stack
     return size;
 }
 
 int main(void){
-    stack* st = new_stack();
-    st = stack_on_stack(st, 10);
-    st = stack_on_stack(st, 21);
-    st = stack_on_stack(st, 3);
-    st = stack_on_stack(st, 42);
-    st = stack_on_stack(st, 1);
-    print_stack(st);
-    print_stack(st);
-    printf("the size is : %d\n", stack_length(st));
-    free(st);
-    printf("stack freed successfully\n");
     return 0;
 }

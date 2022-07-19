@@ -44,7 +44,10 @@ int double_list_size(double_list* dli){
  * @return int 
  */
 int dl_first_node(double_list* dli){
-    if (empty_double_list(dli)) exit(1);
+    if (empty_double_list(dli)) {
+        printf("the list is empty");
+        exit(0);
+    }
     return dli->start->content;
 }
 
@@ -55,7 +58,10 @@ int dl_first_node(double_list* dli){
  * @return int 
  */
 int dl_last_node(double_list* dli){
-    if (empty_double_list(dli)) exit(1);
+    if (empty_double_list(dli)) {
+        printf("the list is empty");
+        exit(0);
+    }
     return dli->end->content;
 }
 
@@ -84,6 +90,7 @@ double_list* add_node_end_dl(double_list* dli, int x){
             printf("dynamic allocation error : FORCED EXIT");
             exit(1);
         }
+        /*the only node in the list*/
         dli->size = 0;
         dli->start = node;
         dli->end = node;
@@ -122,12 +129,13 @@ double_list* add_node_front_dl(double_list* dli, int x){
             exit(1);
         }
         dli->size = 0;
+        /*start and end are the added node*/
         dli->start = node;
         dli->end = node;
     } else {
-        dli->start->back = node;
-        node->next = dli->start;
-        dli->start = node;
+        dli->start->back = node; 
+        node->next = dli->start; 
+        dli->start = node; 
     }
     dli->size = dli->size + 1;
     return dli;
@@ -146,7 +154,7 @@ double_list* pop_back_dl(double_list* dli){
     }
     if (dli->start == dli->end){ // if true we only have on element in the list
         free(dli);
-        dli = NULL; // on sait jamais
+        dli = NULL;
         return new_double_list();
     }
 
@@ -199,7 +207,7 @@ double_list* pop_front_dl(double_list* dli){
  */
 void print_double_list(double_list* dli){
     if (empty_double_list(dli)){
-        printf("la liste est vide");
+        printf("the list is empty");
         return;
     }
     double_list_node* temp_dl_node = dli->start;
@@ -208,6 +216,7 @@ void print_double_list(double_list* dli){
         temp_dl_node = temp_dl_node->next;
     }
     printf("\n");
+    free(temp_dl_node);
 }
 
 /**

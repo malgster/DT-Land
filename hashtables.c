@@ -119,8 +119,7 @@ void hash_table_insert(HashTable *ht, char *key, char *value)
   LinkedPair *current_pair = ht->storage[index];
   LinkedPair *last_pair;
 
-  while (current_pair != NULL && strcmp(current_pair->key, key) != 0) 
-  {
+  while (current_pair != NULL && strcmp(current_pair->key, key)) {
     last_pair = current_pair;
     current_pair = last_pair->next;
   }

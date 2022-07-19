@@ -14,13 +14,13 @@
  * @return binary_tree* 
  */
 binary_tree* new_binary_tree(const int x){
-    binary_tree* bt = malloc(sizeof(*bt));
+    binary_tree* bt = malloc(sizeof(*bt)); 
     if (bt == NULL){
         printf("error in memory allocation : FORCED EXIT\n");
         exit(1);
     }
-
-    bt->node = x;
+    /* only the root is init */
+    bt->node = x; 
     bt->left_tree = NULL;
     bt->right_tree = NULL;
     bt->parent = NULL;
@@ -41,6 +41,7 @@ void clear_binary_tree(binary_tree* bt){
     }
     printf("freeing node [%d]\n", bt->node);
 
+    /*recurcively deleting every branch*/
     clear_binary_tree(bt->left_tree);
     clear_binary_tree(bt->right_tree);
     free(bt);
@@ -60,8 +61,9 @@ binary_tree* unite_binary_trees(binary_tree* lefti, binary_tree* righti, int nod
     bt->left_tree = lefti;
     bt->right_tree = righti;
 
+    /* a null tree doesn't have a parent */
     if (lefti != NULL){
-        lefti->parent = bt;
+        lefti->parent = bt; 
     }
 
     if (righti != NULL){
@@ -88,6 +90,7 @@ void print_binary_tree(binary_tree* bt){
     } else {
         printf("(%d)\n", bt->node);
     }
+    /* recursevely printing every sub-tree */
     if (bt->left_tree != NULL) print_binary_tree(bt->left_tree);
     if (bt->left_tree != NULL) print_binary_tree(bt->right_tree);
 }

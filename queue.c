@@ -62,12 +62,12 @@ queue* dequeue(queue* q){
         printf("can't dequeue an empty queue");
         return NULL;
     } 
-    node* tmp_head_ptr = q->head;
-    q->head = q->head->next; // remove the element
+    node* tmp_head_ptr = q->head; // save the element to delete in an a tmp pointer
+    q->head = q->head->next; // head becomes the next element 
     if (q->head == NULL){
-        q->tail = NULL;
+        q->tail = NULL; // queue is empty
     }
-    free(tmp_head_ptr);
+    free(tmp_head_ptr); // delete the element
     q->size--;
     return q;
 }
@@ -84,7 +84,7 @@ void print_queue(queue* q){
     node* n = q->head;
     while(n != NULL){
         printf("[%d] ", n->content);
-        n = n->next;
+        n = n->next; // iterate through the queue
     }
     printf("\n");
     free(n);
@@ -127,22 +127,6 @@ void clear_queue(queue* q){
 }
 
 int main(void){
-    queue* myQueue = init_queue();
-    myQueue = enqueue(myQueue, 12);
-    myQueue = enqueue(myQueue, 11);
-    myQueue = enqueue(myQueue, 10);
-    myQueue = enqueue(myQueue, 2);
-    print_queue(myQueue);
-    printf("size of the queue : %d\n", myQueue->size);
-    myQueue = dequeue(myQueue);
-    print_queue(myQueue);
-    printf("size of the queue : %d\n", myQueue->size);
-    printf("front node : %d\n", get_front(myQueue)->content);
-    printf("rear node : %d\n", get_rear(myQueue)->content);
-    clear_queue(myQueue);
-    printf("queue cleared\n");
-    print_queue(myQueue);
-    printf("size of the queue : %d\n", myQueue->size);
     return 0;
 }
 

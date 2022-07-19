@@ -1,7 +1,13 @@
 #include "graph.h"
 
 
-
+/**
+ * @brief define a new graph 
+ * 
+ * @param vertices 
+ * @param isOriented 
+ * @return Graph 
+ */
 Graph new_graph(int vertices, int isOriented){
     Graph element;
     element = malloc(sizeof(element));
@@ -25,10 +31,22 @@ Graph new_graph(int vertices, int isOriented){
 
 }
 
+/**
+ * @brief returns 1 if the graph is empty : 0 if not
+ * 
+ * @param gr 
+ * @return int 
+ */
 int graph_is_empty(Graph* gr){
     return (gr == NULL) ? 1 : 0;
 }
 
+/**
+ * @brief creates a node in the graph
+ * 
+ * @param x 
+ * @return NodeListElement* 
+ */
 static NodeListElement* add_node(int x){
     NodeList nl = malloc(sizeof(NodeListElement));
     if (nl == NULL){
@@ -40,6 +58,13 @@ static NodeListElement* add_node(int x){
     return nl;
 }
 
+/**
+ * @brief create an edge in the graph
+ * 
+ * @param gr 
+ * @param source 
+ * @param destination 
+ */
 void add_edge(Graph gr, int source, int destination){
     NodeListElement* node = add_node(destination);
     node->next = gr->neighbours[src-1].start; // the vertice next to node is going to be equal to the start of the list 
@@ -52,6 +77,11 @@ void add_edge(Graph gr, int source, int destination){
     }
 }
 
+/**
+ * @brief free the whole graph in memory
+ * 
+ * @param gr 
+ */
 void free_graph(Graph gr){
     if (graph_is_empty(g) == 1){
         printf("The graph doesn't exist, nothing to free");
@@ -76,6 +106,11 @@ void free_graph(Graph gr){
     free(gr);
 }
 
+/**
+ * @brief prints the graph
+ * 
+ * @param gr 
+ */
 void print_graph(Graph gr){
     if(graph_is_empty(gr)){
         printf("I can't print a non-existing graph..");
@@ -91,12 +126,6 @@ void print_graph(Graph gr){
         }
     }
 }
-
-
-
-
-
-
 
 
 int main(void){
