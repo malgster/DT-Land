@@ -1,6 +1,6 @@
 # malgster's DT Land
 
-DT Land or Data Structure Land is a repo with the implementation of (almost) every data structure
+**DT Land** or **Data sTructure Land** is a repo with the implementation of (almost) every data structure
 
 ## Creatrix :
 
@@ -14,4 +14,4 @@ This repository exists because i wanted to learn how data structures worked, so 
 
 Only a familiarity with programming and C syntax is required, i made the code as relatively clear and commented ~~way to much~~  a lot of it.
 
-// there will be readme by data struct ?
+With each implementation comes a documentation of the Data Structure written by me.
