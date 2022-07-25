@@ -21,4 +21,4 @@ int list_are_equals(list_t* liste1, list_t* liste2);
 int is_in_list(list_t* myList, char car);
 list_t* concatenate_lists(list_t* list1, list_t* list2);
 void sort_the_list(list_t* myMfList);
-list_t* reverse_lists(list_t* myList);
+list_t* reverse_list(list_t* myList);

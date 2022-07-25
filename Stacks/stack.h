@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 typedef struct StackElement {
-int content;
+char content;
 struct StackElement* next;
 } StackElement, stack;
 

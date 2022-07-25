@@ -196,7 +196,7 @@ list_t* delete_last_element(list_t* myList){
 
     while(temporary_list_pointer->next != NULL){ 
 
-        before_pointer = temporary_list_pointer; //  before_pointer gains points to the previous element
+        before_pointer = temporary_list_pointer; //  before_pointer points to the previous element
         temporary_list_pointer = temporary_list_pointer->next;
     }
     // before_pointer now points to the element before the last one
@@ -265,7 +265,7 @@ list_t* insert_char(list_t* myList, char car, int position){
         temporary_list_pointer = temporary_list_pointer->next;
         index++;
     }
-    newElement->next = temporary_list_pointer->next; // on link the element to rest of the list
+    newElement->next = temporary_list_pointer->next; // we link the element to rest of the list
     temporary_list_pointer->next = newElement; // we insert the element
     return myList; 
 }
@@ -355,23 +355,6 @@ list_t* concatenate_lists(list_t* list1, list_t* list2){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-list_t* reverse_lists(list_t* myList){
-    list_Element* past = NULL;
-    list_Element* present = myList;
-    list_Element* futur = NULL;
-    while (present != NULL){
-        futur = present->next;
-        present->next = past;
-        past = present;
-        present = futur;
-    }
-    myList = past;
-    return myList;
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * @brief swap the two list elements in param 
      * 
@@ -385,7 +368,7 @@ list_t* reverse_lists(list_t* myList){
     }
 
     /**
-     * @brief 
+     * @brief bubble sort for the list in parameter
      * 
      * @param myMfList 
      */

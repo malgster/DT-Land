@@ -12,13 +12,14 @@ In it's most simple form, each node of the list contains a **data** and **a poin
 
 * the last node's pointer is a **NULL pointer** and indicates that the end of the list (if the *head* is itself a NULL pointer that means that the list is empty)
  
-![LinkedList](https://i.imgur.com/84y7GPY.jpg)
+![](https://i.imgur.com/4hPy3Sf.jpg)
 
 Because pointers are the things used to link the nodes, there is no requirement for the data to be stored contiguously in memory.
 
 ## Operations :
 
 A quick explanation of the main operation that can be done on the lists, further explanation of the exact things done in order to achieve them are in the *code comments that i left*
+ 
 
 ### Insertion
 
@@ -40,7 +41,7 @@ Inserting an element at the end consists of iterating through the list until the
 
 Inserting an element at a given index consist of iterating through the list with until we arrive to the element at *index-1* we make that pointer point to the new element, and make it's pointer point to the next element at *index+1*, 
 
-![](https://i.imgur.com/9IG6Y3W.jpg)
+![](https://i.imgur.com/PBZcETF.jpg)
 
 
 ### Deletion
@@ -66,5 +67,10 @@ Inserting an element at a given index consist of iterating through the list with
 
 ![](https://i.imgur.com/kR3kXAG.jpg)
 
+#### Delete the whole list : 
+
+As said earlier, the first element *(head)* is the one used to acess the whole list, *but it isn't the whole list itself* so in order to delete it completely, we need to iterate through it and <code>free</code> every element until we arrive to the **NULL** pointer.
+
+![](https://i.imgur.com/4Bi9wW4.png)
 
 
