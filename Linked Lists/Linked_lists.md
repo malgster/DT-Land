@@ -4,6 +4,8 @@
 
 A linked list is a linear sequence of nodes. The order and indexes of theses nodes isn't given by their placement in memory like array. Every node is linked to the next one, and we can iterate on it, add and insert elements to it, and delete from it. 
 
+Linked lists's basic structure can be  used as a core to implement other data structures like *stacks* and *queues*. (instead of arrays).
+
 ## In memory :
 
 In it's most simple form, each node of the list contains a **data** and **a pointer to the next node sequence**  
@@ -11,10 +13,10 @@ In it's most simple form, each node of the list contains a **data** and **a poin
 * The first node's pointer is called the **head** it's the one used to access the whole list
 
 * the last node's pointer is a **NULL pointer** and indicates that the end of the list (if the *head* is itself a NULL pointer that means that the list is empty)
- 
+
 ![](https://i.imgur.com/4hPy3Sf.jpg)
 
-Because pointers are the things used to link the nodes, there is no requirement for the data to be stored contiguously in memory.
+Because pointers are the things used to link the nodes, there is no requirement for the data to be stored contiguously in memory. 
 
 ## Operations :
 

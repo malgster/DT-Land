@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "list.h"
 
 typedef struct node {
     int content;
@@ -15,6 +14,16 @@ typedef struct queue{
     node* tail;
     int size;
 } queue;
+
+queue* init_queue(void);
+queue* enqueue(queue* q, int content);
+queue* dequeue(queue* q);
+void print_queue(queue* q);
+node* get_head(queue* q);
+node* get_tail(queue* q);
+int is_queue_empty(queue* q);
+void clear_queue(queue* q);
+
 
 
 

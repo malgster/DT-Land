@@ -2,13 +2,13 @@
 
 ## Introduction 
 
-A *stack* is a linear data structure that follows the **LIFO (Last In First Out)**, which means that *the last element pushed inside is the one that will be removed first*. 
+A *stack* is a linear data structure that follows the **LIFO (Last In First Out)** methodology, which means that *the last element pushed inside is the one that will be removed first*. 
 
 ![](https://i.imgur.com/ZC2uUsf.png)
 
 ## In memory 
 
-Stacks in memory are structured exactly like **linked lists** : multiple elements consisting of a *value* and *pointer* that points to the next element, the bottom element points to *NULL* and the top element is the one used to *access the stack*
+Our implementation of stacks in memory are structured exactly like **linked lists** : multiple elements consisting of a *value* and *pointer* that points to the next element, the bottom element points to *NULL* and the top element is the one used to *access the stack*
 
 ## Operations 
 

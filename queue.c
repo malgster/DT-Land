@@ -10,15 +10,13 @@
 #include "queue.h"
 
 
-/* [head]-->[node]-->[node]-->[node]-->[tail]*/
-
 
 /**
  * @brief creates a new queue
  * 
  * @return queue* 
  */
-queue* init_queue(){
+queue* init_queue(void){
     queue* q = malloc(sizeof(queue*));
     q->head = NULL;
     q->tail = NULL;
@@ -96,7 +94,7 @@ void print_queue(queue* q){
  * @param q 
  * @return node* 
  */
-node* get_rear(queue* q){
+node* get_head(queue* q){
     return q->head;
 }
 /**
@@ -105,7 +103,7 @@ node* get_rear(queue* q){
  * @param q 
  * @return node* 
  */
-node* get_front(queue* q){
+node* get_tail(queue* q){
     return q->tail;
 }
 /**
@@ -123,10 +121,17 @@ int is_queue_empty(queue* q){
  * @param q 
  */
 void clear_queue(queue* q){
-    while (is_queue_empty(q) == 0) dequeue(q);
+    while (!is_queue_empty(q)) dequeue(q);
+    printf("the queue is now clear\n");
 }
 
 int main(void){
+    queue* monQ = init_queue();
+    monQ = enqueue(monQ, 1);
+    monQ = enqueue(monQ, 2);
+    monQ = enqueue(monQ, 3);
+    print_queue(monQ);
+    clear_queue(monQ);
     return 0;
 }
 
