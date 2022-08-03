@@ -56,6 +56,7 @@ void clear_binary_tree(binary_tree* bt){
  */
 void unite_binary_trees(binary_tree* bt ,binary_tree* lefti, binary_tree* righti){
     clear_binary_tree(bt->left_tree);
+
     /*uniting*/
     bt->left_tree = lefti;
     bt->right_tree = righti;
@@ -85,7 +86,6 @@ void print_tree_2d(binary_tree* bt, Type node_type, int level){
    
     int i;
     if (bt == NULL){
-        //printf("The binary is empty, nothing to print");
         return;
     }
 
@@ -123,6 +123,60 @@ int number_of_nodes(binary_tree* bt){
         return (bt == NULL) ? 0 : (number_of_nodes(bt->left_tree) + number_of_nodes(bt->right_tree) + 1);
 }
 
+/**
+ * @brief calculate the height of the given tree
+ * 
+ * @param bt 
+ * @return int 
+ */
+int tree_height(binary_tree* bt){
+
+    if (bt == NULL) return 0;
+
+    int left_height = tree_height(bt->left_tree);
+    int right_height = tree_height(bt->right_tree);
+
+    /*longest path*/
+    return (left_height > right_height) ? left_height + 1 : right_height + 1;
+
+}
+
+/**
+ * @brief traverse the binary tree in inorder traversal
+ * 
+ * @param bt 
+ */
+void inorder_traversal(binary_tree* bt){
+    if (bt == NULL) return;
+    inorder_traversal(bt->left_tree);
+    printf("[%d] ->", bt->node);
+    inorder_traversal(bt->right_tree);
+}
+
+/**
+ * @brief traverse the binary tree in preorder traversal
+ * 
+ * @param bt 
+ */
+void preorder_traversal(binary_tree* bt){
+    if (bt == NULL) return;
+    printf("[%d] ->", bt->node);
+    preorder_traversal(bt->left_tree);
+    preorder_traversal(bt->right_tree);
+}
+
+/**
+ * @brief traverse the binary tree in postorder traversal
+ * 
+ * @param bt 
+ */
+void postorder_traversal(binary_tree* bt){
+    if (bt == NULL) return;
+    postorder_traversal(bt->left_tree);
+    postorder_traversal(bt->right_tree);
+    printf("[%d] ->", bt->node);
+}
+
 int main(void){
     binary_tree* parent = new_binary_tree(0);
     binary_tree* left = new_binary_tree(1);
@@ -131,13 +185,13 @@ int main(void){
     binary_tree* left_2 = new_binary_tree(4);
     binary_tree* right_1 = new_binary_tree(5);
     binary_tree* right_2 = new_binary_tree(6);
-    binary_tree* left_1_1 = new_binary_tree(7);
-    binary_tree* left_1_2 = new_binary_tree(8);
-    binary_tree* left_2_1 = new_binary_tree(9);
-    binary_tree* left_2_2 = new_binary_tree(10);
-    binary_tree* right_1_1 = new_binary_tree(11);
-    binary_tree* right_1_2 = new_binary_tree(12);
-    binary_tree* right_2_1 = new_binary_tree(13);
+    binary_tree* left_1_1 = new_binary_tree(10);
+    binary_tree* left_1_2 = new_binary_tree(11);
+    binary_tree* left_2_1 = new_binary_tree(12);
+    binary_tree* left_2_2 = new_binary_tree(13);
+    binary_tree* right_1_1 = new_binary_tree(7);
+    binary_tree* right_1_2 = new_binary_tree(8);
+    binary_tree* right_2_1 = new_binary_tree(9);
     binary_tree* right_2_2 = new_binary_tree(14);
     unite_binary_trees(parent,left, right);
     unite_binary_trees(left, left_1, left_2);
@@ -148,6 +202,7 @@ int main(void){
     unite_binary_trees(right_2, right_2_1, right_2_2);
     print_tree_2d(parent, parent->type, 0);
     printf("\nnumber of nodes : %d\n", number_of_nodes(parent));
+    printf("\ntree height : %d\n", tree_height(parent));
     clear_binary_tree(parent);
     return 0;
 }

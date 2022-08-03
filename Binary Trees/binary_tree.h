@@ -22,5 +22,11 @@ void unite_binary_trees(binary_tree* bt ,binary_tree* lefti, binary_tree* righti
 void print_binary_tree_prefix(binary_tree* bt);
 int number_of_nodes(binary_tree* bt);
 void print_tree_2d(binary_tree* bt, Type node_type, int level);
+int tree_height(binary_tree* bt);
+void inorder_traversal(binary_tree* bt);
+void preorder_traversal(binary_tree* bt);
+void postorder_traversal(binary_tree* bt);
+
+
 
 #endif
