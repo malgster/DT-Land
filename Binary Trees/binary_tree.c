@@ -146,11 +146,22 @@ int tree_height(binary_tree* bt){
  * 
  * @param bt 
  */
-void inorder_traversal(binary_tree* bt){
+static void raw_inorder_traversal(binary_tree* bt){
     if (bt == NULL) return;
-    inorder_traversal(bt->left_tree);
+    raw_inorder_traversal(bt->left_tree);
     printf("[%d] ->", bt->node);
-    inorder_traversal(bt->right_tree);
+    raw_inorder_traversal(bt->right_tree);
+}
+
+/**
+ * @brief pretty printing inorder
+ * 
+ * @param bt 
+ */
+void inorder_traversal(binary_tree* bt){
+    printf("Inorder traversal :\n");
+    raw_inorder_traversal(bt);
+    printf("\n");
 }
 
 /**
@@ -158,11 +169,22 @@ void inorder_traversal(binary_tree* bt){
  * 
  * @param bt 
  */
-void preorder_traversal(binary_tree* bt){
+static void raw_preorder_traversal(binary_tree* bt){
     if (bt == NULL) return;
     printf("[%d] ->", bt->node);
-    preorder_traversal(bt->left_tree);
-    preorder_traversal(bt->right_tree);
+    raw_preorder_traversal(bt->left_tree);
+    raw_preorder_traversal(bt->right_tree);
+}
+
+/**
+ * @brief pretty printing preorder
+ * 
+ * @param bt 
+ */
+void preorder_traversal(binary_tree* bt){
+    printf("Preorder traversal :\n");
+    raw_preorder_traversal(bt);
+    printf("\n");
 }
 
 /**
@@ -170,11 +192,22 @@ void preorder_traversal(binary_tree* bt){
  * 
  * @param bt 
  */
-void postorder_traversal(binary_tree* bt){
+static void raw_postorder_traversal(binary_tree* bt){
     if (bt == NULL) return;
-    postorder_traversal(bt->left_tree);
-    postorder_traversal(bt->right_tree);
+    raw_postorder_traversal(bt->left_tree);
+    raw_postorder_traversal(bt->right_tree);
     printf("[%d] ->", bt->node);
+}
+
+/**
+ * @brief 
+ * 
+ * @param bt 
+ */
+void postorder_traversal(binary_tree* bt){
+    printf("Postorder traversal :\n");
+    raw_postorder_traversal(bt);
+    printf("\n");
 }
 
 int main(void){
@@ -203,6 +236,9 @@ int main(void){
     print_tree_2d(parent, parent->type, 0);
     printf("\nnumber of nodes : %d\n", number_of_nodes(parent));
     printf("\ntree height : %d\n", tree_height(parent));
+    inorder_traversal(parent);
+    postorder_traversal(parent);
+    preorder_traversal(parent);
     clear_binary_tree(parent);
     return 0;
 }
