@@ -14,7 +14,7 @@ The DL itself consists of a sequence of nodes, each node of the list contains a 
 
 We can access the list from it's **start** or from it's **end**, using the structure that we defined. 
 
-## Operarations 
+## Operations 
 
 The basic operations that can be done on the DLL are the same ones done on the *simple linked lists*.
 
