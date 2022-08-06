@@ -27,6 +27,8 @@ double_list* add_node_end_dl(double_list* dli, int x);
 double_list* pop_back_dl(double_list* dli);
 double_list* pop_front_dl(double_list* dli);
 double_list* clear_double_list(double_list* dli);
+void print_from_end(double_list* dli);
+void print_from_start(double_list* dli);
 
 
 #endif

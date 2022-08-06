@@ -25,7 +25,7 @@ double_list* new_double_list(){
  * @return int 
  */
 int empty_double_list(double_list* dli){
-    return (dli = NULL) ? 1 : 0;
+    return (dli == NULL) ? 1 : 0;
 }
 
 /**
@@ -90,16 +90,16 @@ double_list* add_node_end_dl(double_list* dli, int x){
             printf("dynamic allocation error : FORCED EXIT");
             exit(1);
         }
-        /*the only node in the list*/
+        /*the first only node in the list*/
         dli->size = 0;
         dli->start = node;
         dli->end = node;
     } else {
-        dli->end->next = node;
-        node->back = dli->end;
-        dli->end = node;
+        dli->end->next = node; // the end of the list is linked to the next new element
+        node->back = dli->end; // the back of the new node needs to point to the last element
+        dli->end = node; // the new node is now the last element
     }
-    dli->size = dli->size + 1;
+    dli->size++; // increments the length
     return dli;
 }
 
@@ -119,7 +119,7 @@ double_list* add_node_front_dl(double_list* dli, int x){
 
     }
     node->content = x;
-    node->next = NULL;
+    node->next = NULL; 
     node->back = NULL;
 
     if (empty_double_list(dli)){ 
@@ -133,11 +133,12 @@ double_list* add_node_front_dl(double_list* dli, int x){
         dli->start = node;
         dli->end = node;
     } else {
-        dli->start->back = node; 
-        node->next = dli->start; 
-        dli->start = node; 
+        dli->start->back = node; // the start of the list is linked to the new element
+        node->next = dli->start; // the next pointer of the new node needs to point to the first element
+        dli->start = node; // the new node is now the first element
     }
-    dli->size = dli->size + 1;
+    dli->size++;
+
     return dli;
 }
 
@@ -165,7 +166,7 @@ double_list* pop_back_dl(double_list* dli){
     temp_node->back = NULL;
     free(temp_node); temp_node = NULL;
 
-    dli->size = dli->size-1;
+    dli->size--;
     return dli;
 
 }
@@ -201,22 +202,39 @@ double_list* pop_front_dl(double_list* dli){
 
 
 /**
- * @brief print the dl
+ * @brief prints the dl from it's start element
  * 
  * @param dli 
  */
-void print_double_list(double_list* dli){
+void print_from_start(double_list* dli){
     if (empty_double_list(dli)){
         printf("the list is empty");
         return;
     }
     double_list_node* temp_dl_node = dli->start;
-    while(temp_dl_node->next != NULL){
+    while(temp_dl_node != NULL){
         printf("[%d] ", temp_dl_node->content);
         temp_dl_node = temp_dl_node->next;
     }
     printf("\n");
-    free(temp_dl_node);
+}
+
+/**
+ * @brief prints the dl from it's end element
+ * 
+ * @param dli 
+ */
+void print_from_end(double_list* dli){
+    if (empty_double_list(dli)){
+        printf("the list is empty");
+        return;
+    }
+    double_list_node* temp_dl_node = dli->end;
+    while(temp_dl_node != NULL){
+        printf("[%d] ", temp_dl_node->content);
+        temp_dl_node = temp_dl_node->back;
+    }
+    printf("\n");
 }
 
 /**
@@ -226,13 +244,22 @@ void print_double_list(double_list* dli){
  * @return double_list* 
  */
 double_list* clear_double_list(double_list* dli){
-    while (empty_double_list(dli)){
+    while (!empty_double_list(dli)){
         dli = pop_back_dl(dli);
     }
+    printf("DL cleared successfully\n");
     return new_double_list();
 }
 
 int main(void) {
+    double_list* dli = new_double_list();
+    dli = add_node_front_dl(dli, 1);
+    dli = add_node_front_dl(dli, 2);
+    dli = add_node_front_dl(dli, 3);
+    dli = add_node_front_dl(dli, 4);
+    print_from_start(dli);
+    print_from_end(dli);
+    clear_double_list(dli);
     return 0;
 }
 
